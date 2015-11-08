@@ -29,7 +29,7 @@ def cascade_archive(inst_or_qs, using, keep_parents=False):
         models.deletion.Collector: this is a standard Collector instance but
             the ArchiveMixin instances are in the fields for update list.
     """
-    from common.models.mixins import ArchiveMixin, ActiveArchiveMixin
+    from .mixins import ArchiveMixin
 
     if not isinstance(inst_or_qs, models.QuerySet):
         instances = [inst_or_qs]
@@ -53,11 +53,8 @@ def cascade_archive(inst_or_qs, using, keep_parents=False):
         # them in the update list.  If we do this, we can just call
         # the collector.delete method.
         inst_list = list(instances)
-        if issubclass(model, ActiveArchiveMixin):
-            active_field = get_field_by_name(model, 'active')
-            collector.add_field_update(active_field, False, inst_list)
 
-        if issubclass(model, (ArchiveMixin, ActiveArchiveMixin)):
+        if issubclass(model, ArchiveMixin):
             deleted_on_field = get_field_by_name(model, 'deleted_on')
             collector.add_field_update(
                 deleted_on_field, deleted_ts, inst_list)
@@ -69,11 +66,7 @@ def cascade_archive(inst_or_qs, using, keep_parents=False):
         # well.
         model = qs.model
 
-        if issubclass(model, ActiveArchiveMixin):
-            active_field = get_field_by_name(model, 'active')
-            collector.add_field_update(active_field, False, qs)
-
-        if issubclass(model, (ArchiveMixin, ActiveArchiveMixin)):
+        if issubclass(model, ArchiveMixin):
             deleted_on_field = get_field_by_name(model, 'deleted_on')
             collector.add_field_update(deleted_on_field, deleted_ts, qs)
 

@@ -1,0 +1,9 @@
+machine:
+    environment:
+        DJANGO_SETTINGS_MODULE: tests_project.circle_settings
+dependencies:
+  pre:
+    - pip install -r requirements.txt
+test:
+  override:
+    - ./runtests.sh
