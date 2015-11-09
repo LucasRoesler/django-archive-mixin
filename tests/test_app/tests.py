@@ -26,17 +26,25 @@ class ArchiveMixinTestCase(TestCase):
         models.RelatedCousinModel.objects.create(related=related)
         related_archivable = models.RelatedArchiveModel.objects.create(
             base=base)
-        models.RelatedCousinArchiveModel.objects.create(
+        cousin_archivable = models.RelatedCousinArchiveModel.objects.create(
             related=related_archivable)
 
         base.delete()
 
         self.assertFalse(models.RelatedModel.objects.exists())
         self.assertFalse(models.RelatedCousinModel.objects.exists())
+
         self.assertFalse(models.RelatedArchiveModel.objects.exists())
         self.assertTrue(models.RelatedArchiveModel.all_objects.exists())
+        related_archivable = models.RelatedArchiveModel.all_objects.get(
+            pk=related_archivable.pk)
+        self.assertIsNotNone(related_archivable.deleted_on)
+
         self.assertFalse(models.RelatedCousinArchiveModel.objects.exists())
         self.assertTrue(models.RelatedCousinArchiveModel.all_objects.exists())
+        cousin_archivable = models.RelatedCousinArchiveModel.all_objects.get(
+            pk=cousin_archivable.pk)
+        self.assertIsNotNone(cousin_archivable.deleted_on)
 
     def test_cascade_delete_qs(self):
         """
