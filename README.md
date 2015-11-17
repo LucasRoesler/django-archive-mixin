@@ -1,3 +1,6 @@
+[![Circle CI](https://circleci.com/gh/LucasRoesler/django-archive-mixin.svg?style=svg)](https://circleci.com/gh/LucasRoesler/django-archive-mixin)
+[![Coverage Status](https://coveralls.io/repos/LucasRoesler/django-archive-mixin/badge.svg?branch=master&service=github)](https://coveralls.io/github/LucasRoesler/django-archive-mixin?branch=master)
+
 # Django Archive Mixin
 
 Implements a soft delete / archive capability for the Django ORM.
