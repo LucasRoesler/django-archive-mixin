@@ -1,0 +1,7 @@
+[run]
+source = test_app
+[report]
+omit =
+    */migrations/*
+   *settings.py
+   .virtualenvs/*

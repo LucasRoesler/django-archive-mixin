@@ -6,3 +6,4 @@ versiontools*
 build*
 *.egg*
 doc/index.html
+tests/.coverage
