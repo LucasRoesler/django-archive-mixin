@@ -7,4 +7,4 @@ dependencies:
 test:
   override:
     - ./runtests.sh
-    - coveralls
+    - cd tests && coveralls
