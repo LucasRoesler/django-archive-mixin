@@ -11,9 +11,9 @@ This project is inspired by other similar projects, such as
 - https://github.com/makinacorpus/django-safedelete, and
 - any of the packages in https://www.djangopackages.com/packages/p/django-safedelete/
 
-This implementation differs in that it not only safe marks an instance as
+This implementation differs in that it not only safely marks an instance as
 deleted, but it also implements that cascade logic so that relationships that
-point to the recently "deleted" instance do not break you application.
+point to the recently "deleted" instance do not break your application.
 
 We piggyback on Django's own delete logic/methodology to help guarentee that
 it will cascade as expected and will abide by Django's `on_delete` api for
